@@ -1,4 +1,4 @@
-import { Dero, Metadata } from "./deps.ts";
+import { Metadatav1 } from "./deps.ts";
 import { swaggerUi } from "./swagger_ui.ts";
 import {
   TApiDoc,
@@ -10,7 +10,12 @@ import {
   TTagObject,
 } from "./types.ts";
 
+declare global {
+  interface Window { Metadata: any; }
+}
+
 function joinProperty(target: any, prop: string, object: Record<string, any>) {
+  const Metadata = window.Metadata || Metadatav1;
   const className = target.constructor.name;
   Metadata.storage[className] = Metadata.storage[className] || {};
   let obj = Metadata.storage[className]["doc_paths"] || {};
@@ -21,6 +26,7 @@ function joinProperty(target: any, prop: string, object: Record<string, any>) {
 }
 
 function addSecurity(className: string, name: string, values: any) {
+  const Metadata = window.Metadata || Metadatav1;
   let security = [
     {
       [name]: values || [],
@@ -37,6 +43,7 @@ function addSecurity(className: string, name: string, values: any) {
 }
 export function ApiOperation(object: TApiDoc) {
   return (target: any, prop: string, des: PropertyDescriptor) => {
+    const Metadata = window.Metadata || Metadatav1;
     if (!object.responses) {
       object.responses = {};
     }
@@ -76,6 +83,7 @@ export function ApiResponse(status: number, object: TRequestBodyObject) {
   }
   let _status = status.toString();
   return (target: any, prop: string, des: PropertyDescriptor) => {
+    const Metadata = window.Metadata || Metadatav1;
     const className = target.constructor.name;
     let obj = Metadata.storage[className]["doc_paths"] || {};
     obj[prop] = obj[prop] || {};
@@ -88,6 +96,7 @@ export function ApiResponse(status: number, object: TRequestBodyObject) {
 export function ApiParameter(object: TParameterObject) {
   let parameters = [object];
   return (target: any, prop: string, des: PropertyDescriptor) => {
+    const Metadata = window.Metadata || Metadatav1;
     const className = target.constructor.name;
     let obj = Metadata.storage[className]["doc_paths"] || {};
     obj[prop] = obj[prop] || {};
@@ -100,6 +109,7 @@ export function ApiParameter(object: TParameterObject) {
 }
 export function ApiSchema(name: string, object: TSchemaObject) {
   return (target: any, prop: string, des: PropertyDescriptor) => {
+    const Metadata = window.Metadata || Metadatav1;
     Metadata.storage["doc_schemas"] = Metadata.storage["doc_schemas"] || {};
     Metadata.storage["doc_schemas"][name] = object;
     return des;
@@ -173,6 +183,7 @@ export function ApiRequestBody(object: TRequestBodyObject) {
 export function ApiDocument(objOrArr: TTagObject | TTagObject[]) {
   let tags = Array.isArray(objOrArr) ? objOrArr : [objOrArr];
   return (target: Function) => {
+    const Metadata = window.Metadata || Metadatav1;
     const className = target.name;
     let route = Metadata.storage[className]["route"];
     let paths = Metadata.storage[className]["doc_paths"];
@@ -210,6 +221,7 @@ export function swagger(
   document: TOpenApi,
   opts: TOptionServe = {},
 ) {
+  const Metadata = window.Metadata || Metadatav1;
   const schemas = opts.validationMetadatasToSchemas
     ? opts.validationMetadatasToSchemas()
     : {};
