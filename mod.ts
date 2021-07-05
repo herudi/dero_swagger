@@ -80,7 +80,6 @@ export function ApiResponse(status: number, object: TRequestBodyObject) {
     let obj = Metadata.storage[className]["doc_paths"] || {};
     obj[prop] = obj[prop] || {};
     obj[prop]["property"] = obj[prop]["property"] || {};
-    obj[prop]["property"] = obj[prop]["property"] || {};
     obj[prop]["property"]["responses"][_status] = object;
     Metadata.storage[className]["doc_paths"] = obj;
     return des;
