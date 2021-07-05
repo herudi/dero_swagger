@@ -1,90 +1,99 @@
 ## Dero Swagger
-Swagger doc for [Dero](https://github.com/herudi/dero) framework based on OAS3. Inspire [nestjs-swagger](https://github.com/nestjs/swagger) and [swagger-ui-express](https://github.com/scottie1984/swagger-ui-express).
 
-> Requires Dero version 1.2.0 or higher
+Swagger doc for [Dero](https://github.com/herudi/dero) framework based on OAS3.
+Inspire [nestjs-swagger](https://github.com/nestjs/swagger) and
+[swagger-ui-express](https://github.com/scottie1984/swagger-ui-express).
+
+> Requires Dero version 1.2.1 or higher
 
 [![License](https://img.shields.io/:license-mit-blue.svg)](http://badges.mit-license.org)
 
 ## Installation
+
 ### deno.land
+
 ```ts
-import {...} from "https://deno.land/x/dero_swagger@0.0.4/mod.ts";
+import {...} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
 ```
 
 ## Usage
+
 ```ts
-import { 
-    Dero, 
-    BaseController, 
-    Controller, 
-    Get,
-    Metadata
-} from "https://deno.land/x/dero@1.2.0/mod.ts";
+import {
+  BaseController,
+  Controller,
+  Dero,
+  Get,
+  Metadata,
+} from "https://deno.land/x/dero@1.2.1/mod.ts";
 
 // global metadata before import/export dero_swagger
 window.Metadata = Metadata;
 
 import {
-    ApiOperation,
-    ApiResponse,
-    ApiDocument,
-    DocumentBuilder,
-    swagger
-} from "https://deno.land/x/dero_swagger@0.0.4/mod.ts";
+  ApiDocument,
+  ApiOperation,
+  ApiResponse,
+  DocumentBuilder,
+  swagger,
+} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
 
 @ApiDocument({
-    name: "Doc user 1.0",
-    description: "doc user description"
+  name: "Doc user 1.0",
+  description: "doc user description",
 })
 @Controller("/user")
 class UserController extends BaseController {
-
-    @ApiResponse(200, { description: "OK" })
-    @ApiOperation({ summary: "get user" })
-    @Get()
-    getUser() {
-        return "Hello";
-    }
+  @ApiResponse(200, { description: "OK" })
+  @ApiOperation({ summary: "get user" })
+  @Get()
+  getUser() {
+    return "Hello";
+  }
 }
 
 class Application extends Dero {
-    constructor() {
-        super();
-        this.use({ class: [UserController] });
+  constructor() {
+    super();
+    this.use({ class: [UserController] });
 
-        // document builder
-        const document = new DocumentBuilder()
-            .setInfo({
-                title: "Rest APIs for amazing app",
-                version: "1.0.0",
-                description: "This is the amazing app",
-            })
-            .addServer("http://localhost:3000")
-            .build()
-        
-        // serve swagger
-        swagger(this, "/api-docs", document);
-    }
+    // document builder
+    const document = new DocumentBuilder()
+      .setInfo({
+        title: "Rest APIs for amazing app",
+        version: "1.0.0",
+        description: "This is the amazing app",
+      })
+      .addServer("http://localhost:3000")
+      .build();
+
+    // serve swagger
+    swagger(this, "/api-docs", document);
+  }
 }
 
 await new Application().listen(3000, () => {
-    console.log("Running on port 3000")
-})
+  console.log("Running on port 3000");
+});
 
 // serving on http://localhost:3000/api-docs
 // lookup json http://localhost:3000/api-docs/json
 ```
 
-
 ## Run
+
 ```bash
 deno run --allow-net --unstable yourfile.ts
 ```
-or 
+
+or
+
 ```bash
 deno run --allow-net yourfile.ts
 ```
+
 ## Bearer Auth (JWT)
+
 ```ts
 ...
 import {
@@ -94,7 +103,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.4/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
 
 @ApiBearerAuth()
 @ApiDocument({
@@ -128,6 +137,7 @@ const document = new DocumentBuilder()
 ```
 
 ## Params
+
 ```ts
 ...
 import {
@@ -137,7 +147,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.4/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
 
 @ApiDocument({
     name: "Doc user 1.0",
@@ -165,6 +175,7 @@ class UserController extends BaseController {
 ```
 
 ## Request Body (Manual)
+
 ```ts
 ...
 import {
@@ -174,7 +185,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.4/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
 
 @ApiDocument({
     name: "Doc user 1.0",
@@ -213,6 +224,7 @@ class UserController extends BaseController {
 ```
 
 ## Request Body (auto generate)
+
 ```ts
 ...
 import {
@@ -222,7 +234,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.4/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
 
 // import class validator
 import {
@@ -265,6 +277,7 @@ class UserController extends BaseController {
 // add to options
 swagger(this, "/api-docs", document, { validationMetadatasToSchemas });
 ```
+
 ## License
 
 [MIT](LICENSE)
