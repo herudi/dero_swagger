@@ -8,7 +8,7 @@ Swagger doc for [Dero](https://github.com/herudi/dero) framework based on OAS3. 
 ## Installation
 ### deno.land
 ```ts
-import {...} from "https://deno.land/x/dero_swagger@0.0.2/mod.ts";
+import {...} from "https://deno.land/x/dero_swagger@0.0.3/mod.ts";
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.2/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.3/mod.ts";
 
 @ApiDocument({
     name: "Doc user 1.0",
@@ -90,7 +90,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.2/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.3/mod.ts";
 
 @ApiBearerAuth()
 @ApiDocument({
@@ -133,7 +133,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.2/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.3/mod.ts";
 
 @ApiDocument({
     name: "Doc user 1.0",
@@ -170,7 +170,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.2/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.3/mod.ts";
 
 @ApiDocument({
     name: "Doc user 1.0",
@@ -218,7 +218,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.2/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.3/mod.ts";
 
 // import class validator
 import {

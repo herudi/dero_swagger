@@ -205,7 +205,7 @@ export function ApiDocument(objOrArr: TTagObject | TTagObject[]) {
 export { DocumentBuilder } from "./builder.ts";
 
 export function swagger(
-  app: Dero,
+  app: any,
   docUrl: string,
   document: TOpenApi,
   opts: TOptionServe = {},
@@ -231,7 +231,7 @@ export function swagger(
   };
   app.get(docUrl + "/swagger-ui-init.js", swaggerUi.serveInitAssets());
   app.get(docUrl, swaggerUi.setup(document, opts));
-  app.get(docUrl + "/json", (req, res) => {
+  app.get(docUrl + "/json", (req: any, res: any) => {
     res.body(document);
   });
 }
