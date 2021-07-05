@@ -13,7 +13,7 @@ Inspire [nestjs-swagger](https://github.com/nestjs/swagger) and
 ### deno.land
 
 ```ts
-import {...} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
+import {...} from "https://deno.land/x/dero_swagger@0.0.6/mod.ts";
 ```
 
 ## Usage
@@ -27,16 +27,13 @@ import {
   Metadata,
 } from "https://deno.land/x/dero@1.2.1/mod.ts";
 
-// global metadata before import/export dero_swagger
-window.Metadata = Metadata;
-
 import {
   ApiDocument,
   ApiOperation,
   ApiResponse,
   DocumentBuilder,
   swagger,
-} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.6/mod.ts";
 
 @ApiDocument({
   name: "Doc user 1.0",
@@ -103,7 +100,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.6/mod.ts";
 
 @ApiBearerAuth()
 @ApiDocument({
@@ -147,7 +144,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.6/mod.ts";
 
 @ApiDocument({
     name: "Doc user 1.0",
@@ -185,7 +182,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.6/mod.ts";
 
 @ApiDocument({
     name: "Doc user 1.0",
@@ -234,7 +231,7 @@ import {
     ApiDocument,
     DocumentBuilder,
     swagger
-} from "https://deno.land/x/dero_swagger@0.0.5/mod.ts";
+} from "https://deno.land/x/dero_swagger@0.0.6/mod.ts";
 
 // import class validator
 import {
