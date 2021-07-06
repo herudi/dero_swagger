@@ -17,4 +17,4 @@ export {
   ApiResponse,
   DocumentBuilder,
   swagger,
-} from "https://deno.land/x/dero_swagger@0.0.6/mod.ts";
+} from "./../mod.ts";

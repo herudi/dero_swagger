@@ -1,4 +1,3 @@
-import { Handler } from "./deps.ts";
 import { GenHtmlOpts } from "./types.ts";
 
 const base_lib_swagger = "https://cdn.jsdelivr.net/npm/swagger-ui-dist@3.51.1";
@@ -187,14 +186,14 @@ const generateHTML = (
   return htmlWithCustomCssUrl.replace("<% title %>", customSiteTitle);
 };
 
-const setup = (swaggerDoc: any, opts: GenHtmlOpts = {}): Handler => {
+const setup = (swaggerDoc: any, opts: GenHtmlOpts = {}) => {
   let html = generateHTML(swaggerDoc, opts);
   html = html.replaceAll(
     "<% url_lib_swagger %>",
     opts.baseUrlLibSwagger ? opts.baseUrlLibSwagger : base_lib_swagger,
   );
 
-  return (req, res) => {
+  return (req: any, res: any) => {
     html = html.replaceAll(
       "<% base %>",
       req.url,
@@ -202,8 +201,8 @@ const setup = (swaggerDoc: any, opts: GenHtmlOpts = {}): Handler => {
     res.type("html").body(html);
   };
 };
-const serveInitAssets = (): Handler => {
-  return (req, res) => {
+const serveInitAssets = () => {
+  return (req: any, res: any) => {
     res.type("application/javascript");
     res.body(swaggerInit);
   };
