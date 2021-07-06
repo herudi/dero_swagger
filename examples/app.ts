@@ -5,21 +5,18 @@ import { Dero, DocumentBuilder, swagger } from "./deps.ts";
 export class Application extends Dero {
   constructor() {
     super();
-    this.use({
+    this.use({ 
       wares: [auth],
-      class: [CatController],
+      class: [CatController] 
     });
     const doc = new DocumentBuilder()
       .setInfo({
         title: "This amazing cat examples",
         version: "1.0.0",
-        description:
-          "This is a sample server Cat server. You can find out more about [https://github.com/herudi/dero_swagger/tree/master/examples](https://github.com/herudi/dero_swagger/tree/master/examples). for auth, please add authorize **1234**",
+        description: "This is a sample server Cat server. You can find out more about [https://github.com/herudi/dero_swagger/tree/master/examples](https://github.com/herudi/dero_swagger/tree/master/examples). for auth, please add authorize **1234**",
       })
       .addBearerAuth()
-      .addSchemes("http")
-      .addSchemes("https")
-      .addServer("https://dero-swagger.deno.dev")
+      .addServer("http://localhost:3000")
       .build();
 
     swagger(this, "/api-docs/v1", doc);
