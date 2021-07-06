@@ -16,9 +16,10 @@ export class Application extends Dero {
         description: "This is a sample server Cat server. You can find out more about [https://github.com/herudi/dero_swagger/tree/master/examples](https://github.com/herudi/dero_swagger/tree/master/examples). for auth, please add authorize **1234**",
       })
       .addBearerAuth()
-      .addServer("http://localhost:3000")
+      .addSchemes("https")
+      .addServer("https://dero-swagger.deno.dev")
       .build();
 
-    swagger(this, "/api-docs/v1", doc);
+    swagger(this, "/api-docs", doc);
   }
 }
