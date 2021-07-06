@@ -14,7 +14,7 @@ declare global {
   }
 }
 function joinProperty(target: any, prop: string, object: Record<string, any>) {
-  const metadata = window.DeroMetadata;
+  const metadata = window.DeroMetadata || {};
   const className = target.constructor.name;
   metadata[className] = metadata[className] || {};
   let obj = metadata[className]["doc_paths"] || {};
@@ -25,12 +25,13 @@ function joinProperty(target: any, prop: string, object: Record<string, any>) {
 }
 
 function addSecurity(className: string, name: string, values: any) {
-  const metadata = window.DeroMetadata;
+  const metadata = window.DeroMetadata || {};
   let security = [
     {
       [name]: values || [],
     },
   ];
+  metadata[className] = metadata[className] || {};
   let paths = metadata[className]["doc_paths"];
   for (const key in paths) {
     if (paths[key]) {
@@ -42,11 +43,12 @@ function addSecurity(className: string, name: string, values: any) {
 }
 export function ApiOperation(object: TApiDoc) {
   return (target: any, prop: string, des: PropertyDescriptor) => {
-    const metadata = window.DeroMetadata;
+    const metadata = window.DeroMetadata || {};
     if (!object.responses) {
       object.responses = {};
     }
     const className = target.constructor.name;
+    metadata[className] = metadata[className] || {};
     let info = metadata[className]["route"][prop];
     let obj = metadata[className]["doc_paths"] || {};
     obj[prop] = {
@@ -82,8 +84,9 @@ export function ApiResponse(status: number, object: TRequestBodyObject) {
   }
   let _status = status.toString();
   return (target: any, prop: string, des: PropertyDescriptor) => {
-    const metadata = window.DeroMetadata;
+    const metadata = window.DeroMetadata || {};
     const className = target.constructor.name;
+    metadata[className] = metadata[className] || {};
     let obj = metadata[className]["doc_paths"] || {};
     obj[prop] = obj[prop] || {};
     obj[prop]["property"] = obj[prop]["property"] || {};
@@ -95,8 +98,9 @@ export function ApiResponse(status: number, object: TRequestBodyObject) {
 export function ApiParameter(object: TParameterObject) {
   let parameters = [object];
   return (target: any, prop: string, des: PropertyDescriptor) => {
-    const metadata = window.DeroMetadata;
+    const metadata = window.DeroMetadata || {};
     const className = target.constructor.name;
+    metadata[className] = metadata[className] || {};
     let obj = metadata[className]["doc_paths"] || {};
     obj[prop] = obj[prop] || {};
     obj[prop]["property"] = obj[prop]["property"] || {};
@@ -108,7 +112,7 @@ export function ApiParameter(object: TParameterObject) {
 }
 export function ApiSchema(name: string, object: TSchemaObject) {
   return (target: any, prop: string, des: PropertyDescriptor) => {
-    const metadata = window.DeroMetadata;
+    const metadata = window.DeroMetadata || {};
     metadata["doc_schemas"] = metadata["doc_schemas"] || {};
     metadata["doc_schemas"][name] = object;
     return des;
@@ -182,8 +186,9 @@ export function ApiRequestBody(object: TRequestBodyObject) {
 export function ApiDocument(objOrArr: TTagObject | TTagObject[]) {
   let tags = Array.isArray(objOrArr) ? objOrArr : [objOrArr];
   return (target: Function) => {
-    const metadata = window.DeroMetadata;
+    const metadata = window.DeroMetadata || {};
     const className = target.name;
+    metadata[className] = metadata[className] || {};
     let route = metadata[className]["route"];
     let paths = metadata[className]["doc_paths"];
     let doc_paths = [] as any;
@@ -219,7 +224,7 @@ export function swagger(
   document: TOpenApi,
   opts: TOptionServe = {},
 ) {
-  const metadata = window.DeroMetadata;
+  const metadata = window.DeroMetadata || {};
   const schemas = opts.validationMetadatasToSchemas
     ? opts.validationMetadatasToSchemas()
     : {};
