@@ -8,7 +8,11 @@ import {
   TSchemaObject,
   TTagObject,
 } from "./types.ts";
-
+declare global {
+  interface Window {
+    DeroMetadata: any;
+  }
+}
 function joinProperty(target: any, prop: string, object: Record<string, any>) {
   const metadata = window.DeroMetadata;
   const className = target.constructor.name;
