@@ -26,6 +26,7 @@ function joinProperty(target: any, prop: string, object: Record<string, any>) {
 
 function addSecurity(className: string, name: string, values: any) {
   const metadata = window.DeroMetadata;
+  console.log(metadata);
   let security = [
     {
       [name]: values || [],
