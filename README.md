@@ -1,12 +1,13 @@
 ## Dero Swagger
+[![License](https://img.shields.io/:license-mit-blue.svg)](http://badges.mit-license.org)
 
 Swagger doc for [Dero](https://github.com/herudi/dero) framework based on OAS3.
 Inspire [nestjs-swagger](https://github.com/nestjs/swagger) and
 [swagger-ui-express](https://github.com/scottie1984/swagger-ui-express).
 
-> Requires Dero version 1.2.1 or higher
+See Demo => https://dero-swagger.deno.dev/api-docs
 
-[![License](https://img.shields.io/:license-mit-blue.svg)](http://badges.mit-license.org)
+> Requires Dero version 1.2.1 or higher
 
 ## Installation
 
